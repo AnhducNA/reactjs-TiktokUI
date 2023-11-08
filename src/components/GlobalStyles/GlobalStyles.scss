@@ -7,9 +7,20 @@
 }
 :root {
   --colorPrimary: rgba(255, 59, 92, 1);
+  --colorPrimary2: rgba(255, 255, 255, 0.9);
   --colorLink: rgba(255, 59, 92, 1);
   --colorBGPrimary: rgba(18, 18, 18, 1);
   --colorBGSecondary: rgba(37, 37, 37, 1);
+  --colorConstBGContainer: rgba(255, 255, 255, 0.12);
+  --colorConstBGContainer2: rgba(255, 255, 255, 0.08);
+  --colorConstBGContainer3: rgba(255, 255, 255, 0.04);
+
+  --colorTextPrimary: rgba(255, 255, 255, 0.9);
+  --colorTextSecondary: rgba(255, 255, 255, 0.75);
+  --colorLinePrimary: rgba(255, 255, 255, 0);
+  --colorLineSecondary: rgba(255, 255, 255, 0.12);
+  --colorLineSecondary2: rgba(22, 24, 35, 0.12);
+  --colorLineInput: rgba(255, 255, 255, 0.5);
 }
 
 :root {
@@ -23,6 +34,12 @@
   --fontSizeH5: 32px;
   --fontSizeH6: 24px;
   --fontSizeH7: 18px;
+  --fontSizeP1: 24px;
+  --fontSizeP2: 18px;
+  --fontSizeP3: 16px;
+  --fontSizeP4: 14px;
+  --fontSizeP5: 12px;
+
 }
 
 * {
@@ -39,4 +56,5 @@ body {
   font-family: "Montserrat", sans-serif;
   font-family: "Roboto", sans-serif;
   font-size: 1.6rem;
+  color: rgba(255, 255, 255, 0.9);
 }

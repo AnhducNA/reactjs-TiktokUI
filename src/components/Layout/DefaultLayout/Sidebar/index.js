@@ -5,7 +5,7 @@ const cx = classNames.bind(styles);
 
 function Sidebar() {
     return (
-        <div className={cx('div_scroll--container')}>
+        <div className={cx('container__sidebar')}>
             sidebar
         </div>
     );
