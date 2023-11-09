@@ -6,7 +6,6 @@ const cx = classNames.bind(styles);
 function Home() {
     return (
         <div className={cx('main')}>
-
             <h2>Home123</h2>
         </div>
     )

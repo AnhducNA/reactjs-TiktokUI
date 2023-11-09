@@ -5,6 +5,7 @@
   --default-layout-header-height: 60px;
 
 }
+
 :root {
   --colorPrimary: rgba(255, 59, 92, 1);
   --colorPrimary2: rgba(255, 255, 255, 0.9);
@@ -57,4 +58,12 @@ body {
   font-family: "Roboto", sans-serif;
   font-size: 1.6rem;
   color: rgba(255, 255, 255, 0.9);
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
 }

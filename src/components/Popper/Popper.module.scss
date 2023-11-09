@@ -1,0 +1,9 @@
+.wrapper {
+  width: 100%;
+  max-height: min((100vh - 96px) - 60px, 734px);
+  overflow: hidden auto;
+  border-radius: 8px;
+  margin: 8px 0 16px 0;
+  padding-top: 8px;
+  background: var(--colorBGSecondary);
+}

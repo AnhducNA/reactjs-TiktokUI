@@ -1,10 +1,23 @@
+.container__searchResult--header {
+  width: 516px;
+
+  .title__suggestAccount {
+    height: 30px;
+    padding: 5px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    color: rgba(255, 255, 255, 0.5);
+  }
+}
+
 .container__header {
   width: 100%;
   height: var(--default-layout-header-height);
   background: var(--colorBGPrimary);
   padding-left: 16px;
   padding-right: 24px;
-  box-shadow: var(--colorConstBGContainer) 0 1px 1px ;
+  box-shadow: var(--colorConstBGContainer) 0 1px 1px;
   position: fixed;
   top: 0;
   display: flex;
@@ -74,6 +87,8 @@
         color: var(--colorTextPrimary);
       }
     }
+
+
   }
 
   &--right {
@@ -112,6 +127,28 @@
       padding: 3px 3px 0px;
       cursor: pointer;
       font-size: 23px;
+    }
+
+    .container__inbox--header {
+      position: relative;
+
+      sup.subBadge {
+        min-width: 20px;
+        height: 20px;
+        font-weight: 600;
+        color: rgb(255, 255, 255);
+        background: rgb(255, 59, 92);
+        font-size: var(--fontSizeP4);
+        line-height: 18px;
+        padding: 0 6px;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: -20%;
+        left: 16px;
+      }
     }
 
     .container__profile {
