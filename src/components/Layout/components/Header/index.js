@@ -3,11 +3,13 @@ import classNames from "classnames/bind";
 import images from "~/assets/images";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {
-    faCircleXmark, faMagnifyingGlass, faMessage, faPaperPlane, faPlus, faSpinner
+    faCircleXmark, faEllipsisVertical, faMagnifyingGlass, faMessage, faPaperPlane, faPlus, faSpinner
 } from '@fortawesome/free-solid-svg-icons'
 import Tippy from "@tippyjs/react";
 import {Wrapper} from "~/components/Popper";
 import SearchItem from "~/components/SearchItem";
+import React from "react";
+import Button from "~/components/Button";
 
 const cx = classNames.bind(styles);
 
@@ -47,24 +49,30 @@ function Header() {
             </Tippy>
         </div>
         <div className={cx('container__header--right')}>
-            <div className={cx('container__upload')}>
-                <FontAwesomeIcon icon={faPlus} className={cx('icon__plus--style')}/>
-                <span className={cx('spanText__upload')}>Upload</span>
-            </div>
-            <div className={cx('iconContainer__message')}>
-                <FontAwesomeIcon icon={faPaperPlane}/>
-            </div>
-            <div className={cx('container__inbox--header')}>
-                    <span>
-                        <FontAwesomeIcon icon={faMessage}/>
-                    </span>
-                <sup className={cx('subBadge')}>37</sup>
-            </div>
-            <div id={cx('header-more-menu-icon')}>
-                <div className={cx('container__profile')}>
+            <Button
+                className="container__upload"
+                text={true}
+                href="#"
+                leftIcon={<FontAwesomeIcon icon={faPlus}/>}
+            >Upload</Button>
+            <Button primary={true}>Log in</Button>
+            <i className={cx('iconWrapper__more--header')}>
+                <FontAwesomeIcon icon={faEllipsisVertical} className={cx('icon__ellipsisVertical--styled')}/>
+            </i>
+            {/*<div className={cx('container__message')}>*/}
+            {/*    <FontAwesomeIcon icon={faPaperPlane}/>*/}
+            {/*</div>*/}
+            {/*<div className={cx('container__inbox--header')}>*/}
+            {/*        <span>*/}
+            {/*            <FontAwesomeIcon icon={faMessage}/>*/}
+            {/*        </span>*/}
+            {/*    <sup className={cx('subBadge')}>37</sup>*/}
+            {/*</div>*/}
+            {/*<div id={cx('header-more-menu-icon')}>*/}
+            {/*    <div className={cx('container__profile')}>*/}
 
-                </div>
-            </div>
+            {/*    </div>*/}
+            {/*</div>*/}
         </div>
     </header>);
 }

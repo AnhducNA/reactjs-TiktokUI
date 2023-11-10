@@ -1,0 +1,66 @@
+.wrapper {
+  min-width: 110px;
+  min-height: 36px;
+  padding: 0 16px;
+  border: 1px solid var(--colorLineSecondary2);
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 21px;
+  cursor: pointer;
+  color: rgb(255, 255, 255);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  + .wrapper {
+    margin-left: 16px;
+  }
+}
+
+.spanIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.spanText__title {
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+span + span {
+  margin-left: 8px;
+}
+
+.text {
+  background-color: var(--colorConstBGContainer2);
+  border-radius: 2px;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.04);
+  }
+}
+
+.primary {
+  background-color: rgb(255, 59, 92);
+
+  &:hover {
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.06)), rgb(254, 44, 85);
+  }
+}
+
+.outline {
+  color: rgb(255, 59, 92);
+  border-color: rgb(255, 59, 92);
+  background-color: rgba(255, 255, 255, 0.08);
+
+  &:hover {
+    background-color: rgba(254, 44, 85, 0.06)
+  }
+}
