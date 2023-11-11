@@ -8,19 +8,23 @@ const cx = classNames.bind(styles);
 
 function Button({
                     children,
-                    href,
-                    to,
+                    href, to,
                     text = false,
-                    primary = false,
-                    outline = false,
+                    primary = false, danger = false, dark = false,
+                    outline_danger = false,
                     disabled = false,
                     className,
-                    leftIcon,
-                    rightIcon,
+                    leftIcon, rightIcon,
                     onClick,
                     ...passProps
                 }) {
-    const classes = {className, text, primary, outline, disabled};
+    const classes = {
+        [className]: className,
+        text,
+        primary, dark, danger,
+        outline_danger,
+        disabled
+    };
     let Tag = 'button';
     const props = {
         onClick, ...passProps
@@ -42,12 +46,11 @@ function Button({
             }
         })
     }
-    return (
-        <Tag className={cx('wrapper', classes)} href={href}>
-            {(leftIcon) ? <span className={cx('spanIcon')}>{leftIcon}</span> : ''}
-            <span className={cx('spanText__title')}>{children}</span>
-            {(rightIcon) ? <span className={cx('spanIcon')}>{rightIcon}</span> : ''}
-        </Tag>);
+    return (<Tag className={cx('wrapper', classes)} href={href}>
+        {(leftIcon) ? <span className={cx('spanIcon')}>{leftIcon}</span> : ''}
+        <span className={cx('spanText__title')}>{children}</span>
+        {(rightIcon) ? <span className={cx('spanIcon')}>{rightIcon}</span> : ''}
+    </Tag>);
 }
 
 export default Button;
