@@ -3,11 +3,19 @@ import classNames from "classnames/bind";
 import images from "~/assets/images";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {
+    faBookmark,
     faCircleHalfStroke,
     faCircleQuestion,
-    faCircleXmark, faEllipsisVertical, faLanguage, faMagnifyingGlass, faMessage, faPaperPlane, faPlus, faSpinner
+    faCircleXmark,
+    faEllipsisVertical, faGear,
+    faLanguage,
+    faMagnifyingGlass,
+    faMessage,
+    faPaperPlane,
+    faPlus, faSignOut,
+    faSpinner, faUser
 } from '@fortawesome/free-solid-svg-icons'
-import Tippy from "@tippyjs/react";
+import HeadlessTippy from "@tippyjs/react/headless";
 import {Wrapper as PopperWrapper} from "~/components/Popper";
 import SearchItem from "~/components/SearchItem";
 import React from "react";
@@ -17,6 +25,9 @@ import Menu from "~/components/Popper/Menu";
 const cx = classNames.bind(styles);
 
 function Header() {
+
+    const currentUser = true;
+
     const MENU_ITEMS = [
         {
             leftIcon: <FontAwesomeIcon icon={faLanguage}/>,
@@ -33,6 +44,25 @@ function Header() {
             rightIcon: <FontAwesomeIcon icon={faLanguage}/>,
         }
     ];
+    const USER_MENUS = [
+        {
+            leftIcon: <FontAwesomeIcon icon={faUser}/>,
+            title: 'View Profile'
+        }, {
+            leftIcon: <FontAwesomeIcon icon={faBookmark}/>,
+            title: 'Favorites'
+        }, {
+            leftIcon: <FontAwesomeIcon icon={faGear}/>,
+            title: 'Setting'
+        },
+        ...MENU_ITEMS,
+        {
+            leftIcon: <FontAwesomeIcon icon={faSignOut}/>,
+            title: 'Log out',
+            to: '/logout',
+            separate: true
+        }
+    ];
     return (
         <header className={cx('container__header')}>
             <div className={cx('container__header--left')}>
@@ -41,8 +71,9 @@ function Header() {
                 </a>
             </div>
             <div className={cx('container__header--center')}>
-                <Tippy
+                <HeadlessTippy
                     interactive={true}
+                    delay={[0, 500]}
                     render={attrs => (
                         <ul id="header-search-results" className={cx('container__searchResult--header')}
                             tabIndex="-1" {...attrs}>
@@ -65,35 +96,55 @@ function Header() {
                             <FontAwesomeIcon icon={faMagnifyingGlass}/>
                         </button>
                     </form>
-                </Tippy>
+                </HeadlessTippy>
             </div>
             <div className={cx('container__header--right')}>
-                <Button
-                    dark={true}
-                    href="#"
-                    leftIcon={<FontAwesomeIcon icon={faPlus}/>}
-                >Upload</Button>
-                <Button danger={true}>Log in</Button>
-                <Menu items={MENU_ITEMS}>
-                    <i className={cx('iconWrapper__more--header')}>
-                        <FontAwesomeIcon icon={faEllipsisVertical} className={cx('icon__ellipsisVertical--styled')}/>
-                    </i>
+                {(currentUser) ? (
+                    <>
+                        <Button
+                            dark={true}
+                            href="#"
+                            leftIcon={<FontAwesomeIcon icon={faPlus}/>}
+                        >Upload</Button>
+                        <div className={cx('container__message')}>
+                            <FontAwesomeIcon icon={faPaperPlane}/>
+                        </div>
+                        <div className={cx('container__inbox--header')}>
+                        <span>
+                            <FontAwesomeIcon icon={faMessage}/>
+                        </span>
+                            <sup className={cx('subBadge')}>37</sup>
+                        </div>
+                    </>
+
+                ) : (
+                    <>
+                        <Button
+                            dark={true}
+                            href="#"
+                            leftIcon={<FontAwesomeIcon icon={faPlus}/>}
+                        >Upload</Button>
+                        <Button danger={true}>Log in</Button>
+                    </>
+                )}
+
+                <Menu items={(USER_MENUS) ? (USER_MENUS) : (MENU_ITEMS)}>
+                    {
+                        (currentUser) ? (
+                            <img className={cx('container__profile')}
+                                 src={images.user_avatar}
+                                 alt={images.user_avatar}
+                            />
+                        ) : (
+                            <i className={cx('iconWrapper__more--header')}>
+                                <FontAwesomeIcon icon={faEllipsisVertical}
+                                                 className={cx('icon__ellipsisVertical--styled')}/>
+                            </i>
+                        )
+                    }
+
                 </Menu>
 
-                {/*<div className={cx('container__message')}>*/}
-                {/*    <FontAwesomeIcon icon={faPaperPlane}/>*/}
-                {/*</div>*/}
-                {/*<div className={cx('container__inbox--header')}>*/}
-                {/*        <span>*/}
-                {/*            <FontAwesomeIcon icon={faMessage}/>*/}
-                {/*        </span>*/}
-                {/*    <sup className={cx('subBadge')}>37</sup>*/}
-                {/*</div>*/}
-                {/*<div id={cx('header-more-menu-icon')}>*/}
-                {/*    <div className={cx('container__profile')}>*/}
-
-                {/*    </div>*/}
-                {/*</div>*/}
             </div>
         </header>);
 }

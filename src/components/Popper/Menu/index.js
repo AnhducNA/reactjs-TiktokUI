@@ -1,35 +1,37 @@
 import styles from './Menu.module.scss';
 import classNames from "classnames/bind";
-import {Wrapper as PopperWrapper} from "~/components/Popper";
-import Tippy from "@tippyjs/react";
 import MenuItem from "~/components/Popper/Menu/MenuItem";
-import React from "react";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCircleHalfStroke, faCircleQuestion, faLanguage} from "@fortawesome/free-solid-svg-icons";
+import React, {useState} from "react";
+import HeadlessTippy from "@tippyjs/react/headless";
 
 const cx = classNames.bind(styles);
 
 function Menu({children, items}) {
 
+    const [history, setHistory] = useState([{data: items}]);
     const renderItems = function () {
-        return items.map((item) => {
-                return <MenuItem data={item}/>
+        return items.map((item, index) => {
+                return <MenuItem data={item} key={index}/>
             }
         )
     }
     return (
-        <Tippy
+        <HeadlessTippy
             interactive
-            delay={[0, 700]}
+            delay={[0, 500]}
+            offset={[12, 8]}
             placement={"bottom-end"}
             render={attrs => (
                 <ul className={cx('list__settingPopup--header')} tabIndex={-1} {...attrs}>
                     {renderItems()}
                 </ul>
             )}
+            onHide={() => {
+                setHistory((prev) => prev.slice(0, 1))
+            }}
         >
             {children}
-        </Tippy>
+        </HeadlessTippy>
     );
 }
 

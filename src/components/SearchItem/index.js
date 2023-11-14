@@ -2,6 +2,7 @@ import classNames from "classnames/bind";
 import styles from './SearchItem.module.scss';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEllipsis, faFlag, faHeartCrack} from "@fortawesome/free-solid-svg-icons";
+import images from "~/assets/images";
 
 const cx = classNames.bind(styles);
 
@@ -10,8 +11,8 @@ function SearchItem() {
         <li className={cx('liContainer__searchItem')}>
             <span className={cx('span__avatar')}>
                 <img className={cx('img__avatar')}
-                     src="https://p16-sign-sg.tiktokcdn.com/aweme/720x720/tos-alisg-avt-0068/9a443831ec95ae0927c9ab19e24798fa.jpeg?x-expires=1699592400&x-signature=F5WFv%2BU3yazHvTCtQWCjqrnOcWc%3D"
-                     alt=""/>
+                     src={images.user_avatar}
+                     alt="LAD"/>
             </span>
             <div className={cx('div__searchItem--content')}>
                 <div className={cx('div__searchUser--info')}>
