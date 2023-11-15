@@ -6,12 +6,8 @@ import {
     faBookmark,
     faCircleHalfStroke,
     faCircleQuestion,
-    faCircleXmark,
     faEllipsisVertical, faGear,
     faLanguage,
-    faMagnifyingGlass,
-    faMessage,
-    faPaperPlane,
     faPlus, faSignOut,
     faSpinner, faUser
 } from '@fortawesome/free-solid-svg-icons'
@@ -21,11 +17,15 @@ import SearchItem from "~/components/SearchItem";
 import React from "react";
 import Button from "~/components/Button";
 import Menu from "~/components/Popper/Menu";
+import Tippy from "@tippyjs/react/headless";
+import Image from "~/components/Image";
+import {ClearSearchIcon, InboxIcon, MessageIcon, SearchIcon, UploadIcon} from "~/components/Icons";
 
 const cx = classNames.bind(styles);
 
 function Header() {
 
+    const ref = React.createRef();
     const currentUser = true;
 
     const MENU_ITEMS = [
@@ -89,11 +89,11 @@ function Header() {
                         <input type="text" placeholder="Search" className={cx('input__search')}/>
                         <div className={cx('icon__wrapper')}>
                             <FontAwesomeIcon icon={faSpinner}/>
-                            <FontAwesomeIcon icon={faCircleXmark}/>
+                            <ClearSearchIcon/>
                         </div>
                         <span className={cx('span__splitter')}></span>
                         <button type="submit" className={cx('button__search')}>
-                            <FontAwesomeIcon icon={faMagnifyingGlass}/>
+                            <SearchIcon/>
                         </button>
                     </form>
                 </HeadlessTippy>
@@ -101,22 +101,53 @@ function Header() {
             <div className={cx('container__header--right')}>
                 {(currentUser) ? (
                     <>
-                        <Button
-                            dark={true}
-                            href="#"
-                            leftIcon={<FontAwesomeIcon icon={faPlus}/>}
-                        >Upload</Button>
-                        <div className={cx('container__message')}>
-                            <FontAwesomeIcon icon={faPaperPlane}/>
-                        </div>
-                        <div className={cx('container__inbox--header')}>
-                        <span>
-                            <FontAwesomeIcon icon={faMessage}/>
-                        </span>
-                            <sup className={cx('subBadge')}>37</sup>
-                        </div>
+                        <Tippy
+                            render={attrs => (
+                                <div className="box" tabIndex="-1" {...attrs}>
+                                    Upload
+                                </div>
+                            )}
+                        >
+                            <span>
+                                <Button
+                                    dark={true}
+                                    href="#"
+                                    leftIcon={<UploadIcon/>}
+                                >Upload</Button>
+                            </span>
+                        </Tippy>
+                        <Tippy
+                            content="message"
+                            placement="bottom"
+                            render={attrs => (
+                                <div className="box" tabIndex="-1" {...attrs}>
+                                    Message
+                                </div>
+                            )}
+                            delay={[0, 200]}
+                        >
+                            <div className={cx('container__message')}>
+                                <MessageIcon/>
+                            </div>
+                        </Tippy>
+                        <Tippy
+                            content="message"
+                            placement="bottom"
+                            render={attrs => (
+                                <div className="box" tabIndex="-1" {...attrs}>
+                                    Inbox
+                                </div>
+                            )}
+                            delay={[0, 200]}
+                        >
+                            <div className={cx('container__inbox--header')}>
+                                <span>
+                                    <InboxIcon/>
+                                </span>
+                                <sup className={cx('subBadge')}>37</sup>
+                            </div>
+                        </Tippy>
                     </>
-
                 ) : (
                     <>
                         <Button
@@ -127,13 +158,14 @@ function Header() {
                         <Button danger={true}>Log in</Button>
                     </>
                 )}
-
+                {/* render setting when hover */}
                 <Menu items={(USER_MENUS) ? (USER_MENUS) : (MENU_ITEMS)}>
                     {
                         (currentUser) ? (
-                            <img className={cx('container__profile')}
-                                 src={images.user_avatar}
-                                 alt={images.user_avatar}
+                            <Image className={cx('container__profile')}
+                                   src={images.user_avatar}
+                                   alt={images.user_avatar}
+                                   ref={ref}
                             />
                         ) : (
                             <i className={cx('iconWrapper__more--header')}>
@@ -142,9 +174,7 @@ function Header() {
                             </i>
                         )
                     }
-
                 </Menu>
-
             </div>
         </header>);
 }

@@ -67,6 +67,9 @@
       .icon__wrapper {
         padding: 0 12px;
         color: var(--colorTextSecondary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
       .span__splitter {
@@ -85,6 +88,9 @@
         cursor: pointer;
         font-size: 22px;
         color: var(--colorTextPrimary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
     }
 
@@ -100,7 +106,6 @@
       width: 32px;
       height: 32px;
       margin-left: 24px;
-      background-image: url('');
       background-size: cover;
       background-repeat: no-repeat;
       border-radius: 50%;
