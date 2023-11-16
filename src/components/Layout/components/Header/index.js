@@ -9,17 +9,15 @@ import {
     faEllipsisVertical, faGear,
     faLanguage,
     faPlus, faSignOut,
-    faSpinner, faUser
+     faUser
 } from '@fortawesome/free-solid-svg-icons'
-import HeadlessTippy from "@tippyjs/react/headless";
-import {Wrapper as PopperWrapper} from "~/components/Popper";
-import SearchItem from "~/components/SearchItem";
 import React from "react";
 import Button from "~/components/Button";
 import Menu from "~/components/Popper/Menu";
 import Tippy from "@tippyjs/react/headless";
 import Image from "~/components/Image";
-import {ClearSearchIcon, InboxIcon, MessageIcon, SearchIcon, UploadIcon} from "~/components/Icons";
+import {InboxIcon, MessageIcon, UploadIcon} from "~/components/Icons";
+import Search from "~/components/Search";
 
 const cx = classNames.bind(styles);
 
@@ -71,32 +69,7 @@ function Header() {
                 </a>
             </div>
             <div className={cx('container__header--center')}>
-                <HeadlessTippy
-                    interactive={true}
-                    delay={[0, 500]}
-                    render={attrs => (
-                        <ul id="header-search-results" className={cx('container__searchResult--header')}
-                            tabIndex="-1" {...attrs}>
-                            <PopperWrapper>
-                                <h4 className={cx('title__suggestAccount')}>Accounts</h4>
-                                <SearchItem/>
-                                <SearchItem/>
-                            </PopperWrapper>
-                        </ul>
-                    )}
-                >
-                    <form action="" method="get" className={cx('container__search')}>
-                        <input type="text" placeholder="Search" className={cx('input__search')}/>
-                        <div className={cx('icon__wrapper')}>
-                            <FontAwesomeIcon icon={faSpinner}/>
-                            <ClearSearchIcon/>
-                        </div>
-                        <span className={cx('span__splitter')}></span>
-                        <button type="submit" className={cx('button__search')}>
-                            <SearchIcon/>
-                        </button>
-                    </form>
-                </HeadlessTippy>
+                <Search/>
             </div>
             <div className={cx('container__header--right')}>
                 {(currentUser) ? (

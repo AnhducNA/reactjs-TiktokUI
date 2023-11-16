@@ -3,6 +3,7 @@ import styles from './SearchItem.module.scss';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEllipsis, faFlag, faHeartCrack} from "@fortawesome/free-solid-svg-icons";
 import images from "~/assets/images";
+import Image from "~/components/Image";
 
 const cx = classNames.bind(styles);
 
@@ -10,7 +11,7 @@ function SearchItem() {
     return (
         <li className={cx('liContainer__searchItem')}>
             <span className={cx('span__avatar')}>
-                <img className={cx('img__avatar')}
+                <Image className={cx('img__avatar')}
                      src={images.user_avatar}
                      alt="LAD"/>
             </span>
