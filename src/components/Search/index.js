@@ -8,6 +8,7 @@ import {faSpinner} from "@fortawesome/free-solid-svg-icons";
 import {ClearSearchIcon, SearchIcon} from "~/components/Icons";
 import classNames from "classnames/bind";
 import Tippy from "@tippyjs/react/headless";
+import useDebounce from "~/hooks";
 
 const cx = classNames.bind(styles)
 const Search = () => {
@@ -16,12 +17,14 @@ const Search = () => {
     const [showResult, setShowResult] = useState(false);
     const [loading, setLoading] = useState(false);
 
+    const debounced = useDebounce(searchValue, 500);
+
     const inputRef = React.createRef();
 
     useEffect(() => {
-        if (searchValue.trim().length > 0) {
+        if (debounced.trim().length > 0) {
             setLoading(true);
-            fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(searchValue)}&type=less`)
+            fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounced)}&type=less`)
                 .then(response => response.json())
                 .then((response) => {
                     setSearchResult(response.data);
@@ -31,7 +34,7 @@ const Search = () => {
                     setLoading(false)
                 });
         }
-    }, [searchValue]);
+    }, [debounced]);
 
     const handleClearInputSearch = () => {
         setSearchValue('');
