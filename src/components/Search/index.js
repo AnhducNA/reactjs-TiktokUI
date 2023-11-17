@@ -7,20 +7,31 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSpinner} from "@fortawesome/free-solid-svg-icons";
 import {ClearSearchIcon, SearchIcon} from "~/components/Icons";
 import classNames from "classnames/bind";
+import Tippy from "@tippyjs/react/headless";
 
 const cx = classNames.bind(styles)
 const Search = () => {
     const [searchValue, setSearchValue] = useState('');
     const [searchResult, setSearchResult] = useState([]);
     const [showResult, setShowResult] = useState(false);
-
-    useEffect(() => {
-        setTimeout(() => {
-            setSearchResult([1, 2, 3]);
-        }, 2);
-    }, []);
+    const [loading, setLoading] = useState(false);
 
     const inputRef = React.createRef();
+
+    useEffect(() => {
+        if (searchValue.trim().length > 0) {
+            setLoading(true);
+            fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(searchValue)}&type=less`)
+                .then(response => response.json())
+                .then((response) => {
+                    setSearchResult(response.data);
+                    setLoading(false);
+                })
+                .catch(() => {
+                    setLoading(false)
+                });
+        }
+    }, [searchValue]);
 
     const handleClearInputSearch = () => {
         setSearchValue('');
@@ -30,16 +41,17 @@ const Search = () => {
     }
 
     return (
-        <HeadlessTippy
-            interactive={true}
-            visible={showResult && searchResult.length>0}
+        <Tippy
+            interactive
+            visible={showResult && searchResult.length > 0}
             render={attrs => (
                 <ul id="header-search-results" className={cx('container__searchResult--header')}
                     tabIndex="-1" {...attrs}>
                     <PopperWrapper>
                         <h4 className={cx('title__suggestAccount')}>Accounts</h4>
-                        <SearchItem/>
-                        <SearchItem/>
+                        {!!searchResult && searchResult.map((result, index) => (
+                            <SearchItem data={result} key={index}/>
+                        ))}
                     </PopperWrapper>
                 </ul>
             )}
@@ -75,15 +87,22 @@ const Search = () => {
                             >
                                 <ClearSearchIcon/>
                             </button>
-                        )}
-                    <FontAwesomeIcon icon={faSpinner}/>
+                        )
+                    }
+                    {
+                        !!loading && (
+                            <i className={cx('icon__wrapper--loading')}>
+                                <FontAwesomeIcon icon={faSpinner}/>
+                            </i>
+                        )
+                    }
                 </div>
                 <span className={cx('span__splitter')}></span>
                 <button type="submit" className={cx('button__search')}>
                     <SearchIcon/>
                 </button>
             </form>
-        </HeadlessTippy>
+        </Tippy>
     );
 };
 

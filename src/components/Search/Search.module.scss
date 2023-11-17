@@ -1,3 +1,12 @@
+@keyframes spinner {
+  from {
+    transform: translateY(-50%) rotate(0);
+  }
+  to {
+    transform: translateY(-50%) rotate(360deg);
+  }
+}
+
 .container__searchResult--header {
   width: 516px;
 
@@ -46,6 +55,13 @@
 
     &--clear {
       background: transparent;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    &--loading {
+      animation: spinner 0.8s linear infinite;
       border: none;
       display: flex;
       align-items: center;

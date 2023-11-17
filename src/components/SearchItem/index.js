@@ -4,21 +4,22 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEllipsis, faFlag, faHeartCrack} from "@fortawesome/free-solid-svg-icons";
 import images from "~/assets/images";
 import Image from "~/components/Image";
+import {Link} from "react-router-dom";
 
 const cx = classNames.bind(styles);
 
-function SearchItem() {
+function SearchItem({data}) {
     return (
-        <li className={cx('liContainer__searchItem')}>
+        <Link to={`/@${data.nickname}`} className={cx('liContainer__searchItem')}>
             <span className={cx('span__avatar')}>
                 <Image className={cx('img__avatar')}
-                     src={images.user_avatar}
-                     alt="LAD"/>
+                       src={data.avatar}
+                       alt={data.full_name}/>
             </span>
             <div className={cx('div__searchItem--content')}>
                 <div className={cx('div__searchUser--info')}>
-                    <h4 className={cx('title__item')}>Duc521</h4>
-                    <p className={cx('p__item--name')}>Le Anh Duc</p>
+                    <h4 className={cx('title__item')}>{data.nickname}</h4>
+                    <p className={cx('p__item--name')}>{data.full_name}</p>
                 </div>
                 <div className={cx('container__action')}>
                     <FontAwesomeIcon icon={faEllipsis}/>
@@ -34,9 +35,10 @@ function SearchItem() {
                     </div>
                 </div>
             </div>
-        </li>
+        </Link>
 
-    );
+    )
+        ;
 }
 
 export default SearchItem;
