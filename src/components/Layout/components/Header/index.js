@@ -17,7 +17,7 @@ import Menu from "~/components/Popper/Menu";
 import Tippy from "@tippyjs/react/headless";
 import Image from "~/components/Image";
 import {InboxIcon, MessageIcon, UploadIcon} from "~/components/Icons";
-import Search from "~/components/Search";
+import Search from "src/components/Layout/components/Search";
 
 const cx = classNames.bind(styles);
 
