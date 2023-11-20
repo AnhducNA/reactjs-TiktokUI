@@ -50,7 +50,7 @@ function Button({
         })
     }
     return (
-        <Tag className={classes} href={href}>
+        <Tag className={classes} href={href} onClick={onClick}>
             {(leftIcon) ? <span className={cx('spanIcon')}>{leftIcon}</span> : ''}
             <span className={cx('spanText__title')}>{children}</span>
             {(rightIcon) ? <span className={cx('spanIcon')}>{rightIcon}</span> : ''}

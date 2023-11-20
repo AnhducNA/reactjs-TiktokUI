@@ -11,7 +11,25 @@
 .item__menu {
   list-style: none;
   width: 100%;
-  &.separate{
+
+  &.separate {
     border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  &__btn--back {
+    background-color: transparent;
+    border: none;
+    color: var(--colorTextPrimary);
+    cursor: pointer;
+    padding: 0 10px;
+  }
+
+  &__title {
   }
 }

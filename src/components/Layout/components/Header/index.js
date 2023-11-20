@@ -9,7 +9,7 @@ import {
     faEllipsisVertical, faGear,
     faLanguage,
     faPlus, faSignOut,
-     faUser
+    faUser
 } from '@fortawesome/free-solid-svg-icons'
 import React from "react";
 import Button from "~/components/Button";
@@ -18,6 +18,8 @@ import Tippy from "@tippyjs/react/headless";
 import Image from "~/components/Image";
 import {InboxIcon, MessageIcon, UploadIcon} from "~/components/Icons";
 import Search from "src/components/Layout/components/Search";
+import {Link} from "react-router-dom";
+import routesConfig from "~/config/routes";
 
 const cx = classNames.bind(styles);
 
@@ -29,7 +31,22 @@ function Header() {
     const MENU_ITEMS = [
         {
             leftIcon: <FontAwesomeIcon icon={faLanguage}/>,
-            title: 'English'
+            title: 'English',
+            children: {
+                title: 'Language',
+                data: [
+                    {
+                        type: 'language',
+                        title: 'English',
+                        code: 'en'
+                    },
+                    {
+                        type: 'language',
+                        title: 'Vietnamese',
+                        code: 'vi'
+                    }
+                ]
+            }
         },
         {
             leftIcon: <FontAwesomeIcon icon={faCircleQuestion}/>,
@@ -61,12 +78,23 @@ function Header() {
             separate: true
         }
     ];
+
+    const handleMenuChange = (menuItem) => {
+        switch (menuItem.type) {
+            case 'language' :
+                // Handle change language
+                break;
+            default:
+
+        }
+    };
+
     return (
         <header className={cx('container__header')}>
             <div className={cx('container__header--left')}>
-                <a href="/">
+                <Link to={routesConfig.home}>
                     <img src={images.logo} width="118" height="42" alt="TikTok"/>
-                </a>
+                </Link>
             </div>
             <div className={cx('container__header--center')}>
                 <Search/>
@@ -132,7 +160,10 @@ function Header() {
                     </>
                 )}
                 {/* render setting when hover */}
-                <Menu items={(USER_MENUS) ? (USER_MENUS) : (MENU_ITEMS)}>
+                <Menu
+                    items={(USER_MENUS) ? (USER_MENUS) : (MENU_ITEMS)}
+                      onChange={ handleMenuChange }
+                >
                     {
                         (currentUser) ? (
                             <Image className={cx('container__profile')}

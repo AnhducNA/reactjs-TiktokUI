@@ -24,6 +24,7 @@
 }
 
 :root {
+  --font-family: TikTokFont, sans-serif;
   --fontWeightRegular: 400;
   --fontWeightSemibold: 500;
   --fontWeightBold: 700;
@@ -52,7 +53,7 @@ html {
 }
 
 body {
-  font-family: TikTokFont, sans-serif;
+  font-family: var(--font-family);
   font-size: 1.6rem;
   color: var(--colorTextPrimary);
 

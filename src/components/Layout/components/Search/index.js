@@ -40,12 +40,20 @@ const Search = () => {
         inputRef.current.focus();
     }
 
+    const handleChange = (event) => {
+        const searchValue = event.target.value;
+        if (!searchValue.startsWith(' ')) {
+            setSearchValue(searchValue);
+        }
+    }
+
     return (
         <Tippy
             interactive
             visible={showResult && searchResult.length > 0}
-            render={attrs => (
-                <ul id="header-search-results" className={cx('container__searchResult--header')}
+            render={(attrs) => (
+                <ul
+                    className={cx('container__searchResult--header')}
                     tabIndex="-1" {...attrs}>
                     <PopperWrapper>
                         <h4 className={cx('title__suggestAccount')}>Accounts</h4>
@@ -65,11 +73,7 @@ const Search = () => {
                 <input
                     ref={inputRef}
                     value={searchValue}
-                    onChange={
-                        (e) => {
-                            setSearchValue(e.target.value)
-                        }
-                    }
+                    onChange={handleChange}
                     onFocus={
                         () => {
                             setShowResult(true)
@@ -81,7 +85,7 @@ const Search = () => {
                 />
                 <div className={cx('icon__wrapper')}>
                     {
-                        !!searchValue && (
+                        !!searchValue && !loading && (
                             <button className={cx('icon__wrapper--clear')}
                                     onClick={handleClearInputSearch}
                             >
@@ -98,7 +102,8 @@ const Search = () => {
                     }
                 </div>
                 <span className={cx('span__splitter')}></span>
-                <button type="submit" className={cx('button__search')}>
+                <button type="submit" className={cx('button__search')}
+                        onMouseDown={(event) => event.preventDefault()}>
                     <SearchIcon/>
                 </button>
             </form>
